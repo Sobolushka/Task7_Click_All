@@ -26,26 +26,27 @@ public class ClickAll {
         wait = new WebDriverWait(driver,1000);
     }
     @Test
-    public void myFirstTest(){
+    public void myFirstTest() throws InterruptedException {
         driver.get("http://localhost/litecart/admin/");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.name("login")).click();
-        List<WebElement> ListElement = driver.findElements(By.cssSelector("div#box-apps-menu-wrapper li"));
+        Thread.sleep(500);
+        List<WebElement> ListElement = driver.findElements(By.id("app-"));
         List<WebElement> subListElement;
         int sizeList = ListElement.size();
         for (int i = 0; i < sizeList; i++) {
             ListElement.get(i).findElement(By.tagName("a")).click();
-            ListElement = driver.findElements(By.cssSelector("div#box-apps-menu-wrapper li"));
-            subListElement = ListElement.get(i).findElements(By.cssSelector("li a"));
+            ListElement = driver.findElements(By.id("app-"));
+            subListElement = ListElement.get(i).findElements(By.cssSelector("[id ^= doc-]"));
             int kk= subListElement.size();
             for (int j = 0; j < kk; j++) {
                 subListElement.get(j).click();
                 driver.findElement(By.tagName("h1"));
-                ListElement = driver.findElements(By.cssSelector("div#box-apps-menu-wrapper li"));
-                subListElement = ListElement.get(i).findElements(By.cssSelector("li a"));
+                ListElement = driver.findElements(By.id("app-"));
+                subListElement = ListElement.get(i).findElements(By.cssSelector("[id ^= doc-]"));
             }
-            ListElement = driver.findElements(By.cssSelector("div#box-apps-menu-wrapper li"));
+            ListElement = driver.findElements(By.id("app-"));
         }
     }
     @After
